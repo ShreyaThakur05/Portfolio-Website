@@ -307,13 +307,15 @@ footer a{margin-left:16px}footer a:hover{color:var(--accent)}
 .chead .x{margin-left:auto;cursor:pointer;color:var(--muted);border:1px solid var(--line);width:30px;height:30px;display:grid;place-items:center;background:none}
 .chead .x:hover{color:var(--err);border-color:var(--err)}
 .cmsgs{flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:10px}
-.msg{max-width:86%;padding:11px 14px;font-size:14px;line-height:1.55;border:1px solid var(--line)}
+@keyframes msgin{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.msg,.cact,.typing{animation:msgin .32s cubic-bezier(.2,.8,.2,1)}
+.msg{max-width:86%;padding:11px 14px;font-size:14px;line-height:1.55;border:1px solid var(--line);transition:border-color .2s}
 .msg.bot{align-self:flex-start;background:var(--surface)}
 .msg.me{align-self:flex-end;background:var(--accent);color:#fff;border-color:var(--accent)}
 .msg.bot b{color:var(--accent);font-weight:600}
 .cact{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;max-width:90%}
 .cact a,.cact button{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--accent);color:var(--accent);background:none;padding:6px 10px;cursor:pointer;transition:.16s;text-decoration:none}
-.cact a:hover,.cact button:hover{background:var(--accent);color:#fff}
+.cact a:hover,.cact button:hover{background:var(--accent);color:#fff;transform:translateY(-1px)}
 .cin{display:flex;gap:8px;padding:13px 14px;border-top:1px solid var(--line)}
 .cin input{flex:1;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-family:var(--body);font-size:14px;padding:10px 12px;outline:none}
 .cin input:focus{border-color:var(--accent)}
@@ -1063,17 +1065,21 @@ $('#cbotFace').innerHTML=avatar('');$('#cheadFace').innerHTML=avatar('');
 addEventListener('pointermove',e=>{document.querySelectorAll('.avatar').forEach(av=>{const r=av.getBoundingClientRect();if(!r.width)return;const cx=r.left+r.width/2,cy=r.top+r.height/2,dx=e.clientX-cx,dy=e.clientY-cy,ang=Math.atan2(dy,dx),dist=Math.min(2.6,Math.hypot(dx,dy)/45),g=av.querySelector('.av-pupils');if(g)g.setAttribute('transform',`translate(${(Math.cos(ang)*dist).toFixed(2)} ${(Math.sin(ang)*dist).toFixed(2)})`)})});
 
 /* ---- scripted assistant ---- */
-function botReply(text){const t=text.toLowerCase(),has=(...k)=>k.some(w=>t.includes(w));
+function botReply(text){const t=text.toLowerCase();
+  const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const has=(...k)=>k.some(w=>new RegExp('\\b'+esc(w)+'\\b','i').test(t));
   const proj=DATA.projects.find(p=>t.includes(p.label.toLowerCase())||t.includes(p.id));
   if(proj)return{html:`<b>${proj.label}</b> - ${proj.sub}. ${proj.impact}`,actions:[{label:'Open case study',go:()=>openProject(proj.id)},{label:'View source',href:proj.code}]};
-  if(has('hi','hello','hey','yo ','hii','namaste'))return{html:"Hi - I'm Shreya's portfolio assistant. Ask about her projects, skills, experience, or how to reach her.",chips:['What can she build?','Show me a project','Education','Is she available?']};
+  if(has('hi','hello','hey','yo','hii','namaste'))return{html:"Hi - I'm Shreya's portfolio assistant. Ask about her projects, skills, experience, or how to reach her.",chips:['What can she build?','Show me a project','Education','Is she available?']};
   if(has('who','about','yourself','introduce'))return{html:"Shreya is a full-stack &amp; AI/ML engineer - CSE at <b>IIIT Nagpur</b> (CGPA 8.95) plus a parallel Data Science degree at <b>IIT Madras</b>. She builds products and the AI inside them.",chips:['What can she build?','Is she available?']};
   if(has('skill','stack','tech','language','tool','toolkit','framework','build'))return{html:"Across the stack: <b>Python, JavaScript, Go, Java, SQL</b>; AI/ML with <b>RAG, LangChain, GPT-4o, Gemini, Pinecone, LightGBM</b>; <b>React, Next.js, React Native, Flask, Express</b>; and Postgres/Mongo/Redis, Docker, Kafka.",chips:['Show me a project','Is she available?']};
   if(has('project','work','portfolio','made','shipped'))return{html:"She has shipped <b>30+ projects</b>. Favourites: <b>SyntaxEye</b> (AI code review), <b>RAG Doc-QA</b> (production RAG on GPT-4o), <b>Schedulo</b> (scheduling with 2-way calendar sync). Which would you like?",chips:["SyntaxEye","RAG Doc-QA","Schedulo","Smart Tasks"]};
   if(has('experience','intern','amazon','comparely','history','employ'))return{html:"Highlights: <b>Amazon ML Summer School</b> (top 5% of 60,000+), <b>SWE Intern at Comparely</b> (React Native + Go, -35% latency, +30% retention), and <b>Lead Organiser &amp; dev, WomenInDev 2.0</b> (200+ attendees).",chips:['Is she available?']};
   if(has('cgpa','gpa','grade','grades','marks','college','university','school','study','studying','education','educated','degree','iiit','iit','nagpur','madras','b.tech','btech','diploma','data science','course')){const lead=has('cgpa','gpa','grade','marks')?"Shreya's CGPA at <b>IIIT Nagpur</b> is <b>8.95</b>. ":"";return{html:lead+"Shreya is a <b>B.Tech Computer Science</b> undergraduate at <b>IIIT Nagpur</b> (CGPA 8.95), pursuing a parallel <b>Diploma in Programming and Data Science</b> at <b>IIT Madras</b>.",chips:['What can she build?','Is she available?']};}
+  if(has('design','designing','ui','ux','figma','graphic'))return{html:"Design isn't her main lane, but she ships polished, usable interfaces as part of full-stack work - comfortable in <b>Figma</b> and building clean UI with <b>React/Tailwind</b>. For dedicated visual/graphic design, best to ask her directly.",chips:['What can she build?','Is she available?']};
   if(has('leetcode','codechef','gfg','geeksforgeeks','competitive','dsa','algorithm','rating','rank'))return{html:"Strong CP: <b>LeetCode Knight</b> - 500+ solved, rating 2006 (top 5%); <b>100+ on GeeksforGeeks</b>; <b>CodeChef 3★</b> (1652)."};
-  if(has('contact','reach','hire','connect','available','availab','recruit','opportun','role','hiring','vacanc'))return{html:"She is <b>open to internships, full-time roles &amp; collaborations</b>. Use the form, or email <b>"+DATA.email+"</b>.",actions:[{label:'Go to contact',go:()=>{location.hash='#contact'}},{label:'Email',href:'mailto:'+DATA.email},{label:'Résumé',href:DATA.resume,dl:true}]};
+  if(has('role','position','domain','field','specialize','specialise','niche'))return{html:"She's worked across <b>full-stack engineering and AI/ML</b>, and has picked up new domains fast wherever a project needed it - so chances are there's a fit. The best way to know for sure: drop her an <b>email</b> or a message on the <b>contact form</b> - she's known for replying as soon as possible.",actions:[{label:'Go to contact',go:()=>{location.hash='#contact'}},{label:'Email',href:'mailto:'+DATA.email}]};
+  if(has('contact','reach','hire','connect','available','availab','recruit','opportun','hiring','vacanc'))return{html:"She is <b>open to internships, full-time roles &amp; collaborations</b>. Use the form, or email <b>"+DATA.email+"</b>.",actions:[{label:'Go to contact',go:()=>{location.hash='#contact'}},{label:'Email',href:'mailto:'+DATA.email},{label:'Résumé',href:DATA.resume,dl:true}]};
   if(has('email','mail'))return{html:"Reach her at <b>"+DATA.email+"</b>.",actions:[{label:'Email',href:'mailto:'+DATA.email}]};
   if(has('resume','cv'))return{html:"Here is her résumé.",actions:[{label:'Download résumé',href:DATA.resume,dl:true}]};
   if(has('location','based','where','city','pune','relocat','remote'))return{html:"She is based in <b>Pune, India</b> - open to remote and relocation."};
