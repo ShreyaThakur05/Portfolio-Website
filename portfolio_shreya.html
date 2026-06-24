@@ -897,7 +897,7 @@ $('#mClose').addEventListener('click',closeModal);$('#scrim').addEventListener('
 addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeCmd()}});
 
 /* contact */
-const WEB3FORMS_ACCESS_KEY='YOUR_WEB3FORMS_ACCESS_KEY';
+const WEB3FORMS_ACCESS_KEY='eaf831fa-65a9-4f04-9947-9c065d3e8b72';
 $('#cSend').addEventListener('click',()=>{const nm=($('#cName').value||'').trim(),em=($('#cEmail').value||'').trim(),msg=($('#cMsg').value||'').trim(),note=$('#cNote');
   if(!nm||!msg){note.textContent='Please add your name and a message.';note.style.color='var(--err)';return}
   const btn=$('#cSend');btn.textContent='Sending…';
