@@ -1,0 +1,193 @@
+%-------------------------------------------------------------------------------
+% Shreya Thakur - Resume (ATS-optimized)
+% Based on Jake Gutierrez's resume template (MIT).
+% ATS notes:
+%   - \pdfgentounicode=1 + glyphtounicode so every glyph maps to real text
+%   - Section titles are plain bold caps (no \scshape: it parsed as "E DUCATION")
+%   - Contact links print the actual URL text (ATS cannot read hyperlink targets)
+%   - Only ASCII-safe symbols in bullets (no arrows, tildes or special dashes)
+%-------------------------------------------------------------------------------
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[final]{microtype}
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+\hypersetup{
+  pdftitle={Shreya Thakur - Resume},
+  pdfauthor={Shreya Thakur},
+  pdfsubject={Software Engineer - Full-Stack and AI/ML},
+  pdfkeywords={Software Engineer, Full-Stack, AI/ML, Python, TypeScript, React, Next.js, NestJS, Node.js, SQL, RAG, LLM, LangChain}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.55in}
+\addtolength{\evensidemargin}{-0.55in}
+\addtolength{\textwidth}{1.1in}
+\addtolength{\topmargin}{-0.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{\vspace{-8pt}\raggedright\large\bfseries}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+
+% ---------- Custom commands ----------
+\newcommand{\resumeItem}[1]{\item\small{#1 \vspace{-2pt}}}
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.18in, itemsep=0pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------------------------------------------
+\begin{document}
+
+%---------- HEADING ----------
+\begin{center}
+  {\Huge \textbf{Shreya Thakur}} \\ \vspace{2pt}
+  \small +91-8668806190 $|$
+  \href{mailto:shreyathakurindia@gmail.com}{shreyathakurindia@gmail.com} $|$
+  Pune, India \\ \vspace{1pt}
+  \small
+  \href{https://www.linkedin.com/in/shreya-thakur-734097282/}{linkedin.com/in/shreya-thakur-734097282} $|$
+  \href{https://github.com/ShreyaThakur05}{github.com/ShreyaThakur05} $|$
+  \href{https://portfolio-website-nine-lovat-74.vercel.app}{portfolio-website-nine-lovat-74.vercel.app}
+\end{center}
+
+%---------- SUMMARY ----------
+\section{SUMMARY}
+\small{Software Engineer (SDE Intern at TruEstate) building production full-stack systems with TypeScript, Next.js, NestJS
+and SQL, and Generative AI applications with RAG, LLM agents, LangChain and LangGraph. LeetCode Knight (top 5\%).}
+
+%---------- EDUCATION ----------
+\section{EDUCATION}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Indian Institute of Information Technology, Nagpur}{Nagpur, India}
+      {Bachelor of Technology (B.Tech) in Computer Science and Engineering; CGPA: 8.94/10}{Aug 2023 -- May 2027}
+    \resumeSubheading
+      {Indian Institute of Technology, Madras}{Remote}
+      {Diploma in Programming and Data Science}{Sep 2023 -- Sep 2027}
+    \vspace{3pt}\item \small{\textbf{Coursework:} Data Structures and Algorithms, OOP, DBMS, Operating Systems, Computer Networks, Machine Learning}
+  \resumeSubHeadingListEnd
+
+%---------- EXPERIENCE ----------
+\section{EXPERIENCE}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {TruEstate (AllDoors)}{Bangalore, India}
+      {Software Development Engineer (SDE) Intern}{Jul 2026 -- Present}
+      \resumeItemListStart
+        \resumeItem{Built the customer-facing \textbf{Next.js} and \textbf{TypeScript} website for AllDoors, a core pillar of iQOL,
+          owning the landing and property detail pages from scratch; shipped \textbf{250+ commits (15K+ lines)} across \textbf{5 production repositories}.}
+        \resumeItem{Led the \textbf{NoSQL to SQL migration}, restructuring the property data model, writing \textbf{NestJS} endpoints and
+          backfill scripts; integrated a \textbf{Typesense} search index for fast, typo-tolerant property search.}
+        \resumeItem{Shipped \textbf{WhatsApp Cloud API} enquiry templates and reply notifications across a microservice, the API and the CRM;
+          built an analytics dashboard for user acquisition and conversion funnels.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Comparely}{Remote}
+      {Software Engineering Intern}{Jun 2025}
+      \resumeItemListStart
+        \resumeItem{Shipped cross-platform mobile interfaces in \textbf{React Native} with \textbf{Go} backend services for \textbf{500+ active users},
+          reducing API latency by \textbf{35\%}; analyzed usage funnel data with \textbf{SQL} to identify drop-off points.}
+        \resumeItem{Redesigned the onboarding UX, improving user retention by \textbf{30\%}; deployed modular services with input validation
+          and centralized exception handling, cutting the production error rate by \textbf{25\%}.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%---------- PROJECTS ----------
+\section{PROJECTS}
+    \resumeSubHeadingListStart
+
+      \resumeProjectHeading
+          {\textbf{RAG-Based Document QA System} $|$ \emph{Python, FastAPI, GPT-4o, LangChain, Pinecone, MongoDB}}{}
+          \resumeItemListStart
+            \resumeItem{Engineered a production-grade \textbf{Retrieval-Augmented Generation (RAG)} pipeline for multi-format documents
+              (PDF, DOCX, images) with \textbf{Tesseract OCR} fallback, reducing manual review time by \textbf{40\%}.}
+            \resumeItem{Designed dual-layer caching (MongoDB exact match + Pinecone semantic match) with vector search and chunking to cut
+              redundant LLM calls, tuning thresholds on cache hit rate and latency.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{ET GenAI Platform: Agentic News Intelligence} $|$ \emph{FastAPI, React, LangGraph, Groq Llama 3.3, SSE}}{}
+          \resumeItemListStart
+            \resumeItem{Built a 3-node \textbf{LangGraph} agent pipeline (fetch, filter, format) streaming personalized briefings over
+              \textbf{Server-Sent Events} from 7 live news and market feeds, with grounded Q\&A and citations to limit hallucination.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Comment Category Prediction} $|$ \emph{Python, LightGBM, XGBoost, scikit-learn, TF-IDF, SQL}}{}
+          \resumeItemListStart
+            \resumeItem{Developed an end-to-end \textbf{machine learning} classification pipeline on \textbf{198,000} samples, achieving a
+              \textbf{Macro F1 of 0.817} with LightGBM and outperforming baselines by \textbf{7\%}.}
+            \resumeItem{Engineered 20+ features (temporal signals, vote ratios, demographic flags) and handled a 57.66\% class imbalance
+              using balanced class weights and 3-fold stratified cross-validation.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{SyntaxEye: AI Code Review Tool} $|$ \emph{React.js, Node.js, Express.js, Gemini API}}{}
+          \resumeItemListStart
+            \resumeItem{Designed structured \textbf{prompt engineering} templates (chain-of-thought, output-format constraints) for the Gemini API
+              to review code for correctness, performance and security, improving response consistency by \textbf{30\%}; served via a Node.js/Express REST API.}
+          \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+%---------- SKILLS ----------
+\section{TECHNICAL SKILLS}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages:} Python, TypeScript, JavaScript, SQL, Go, C \\
+     \textbf{Frameworks:} React.js, Next.js, React Native, Node.js, Express.js, NestJS, FastAPI, Flask, Tailwind CSS \\
+     \textbf{AI/ML:} Generative AI, LLMs, RAG, LangChain, LangGraph, Prompt Engineering, Pinecone, scikit-learn, XGBoost \\
+     \textbf{Databases:} PostgreSQL, MySQL, MongoDB, SQLite, Redis, Firebase Firestore, BigQuery, Typesense \\
+     \textbf{Cloud and Tools:} Docker, Google Cloud Run, Git, GitHub, Linux, Postman, REST APIs, Figma
+    }}
+ \end{itemize}
+
+%---------- ACHIEVEMENTS ----------
+\section{ACHIEVEMENTS AND LEADERSHIP}
+ \begin{itemize}[leftmargin=0.15in, itemsep=0pt]
+    \resumeItem{\textbf{Amazon ML Summer School 2025:} selected in the top 5\% of 60,000+ applicants for Amazon's ML program.}
+    \resumeItem{\textbf{LeetCode Knight:} 500+ problems solved, max rating 2006 (top 5\% globally); \textbf{CodeChef 3-Star} (max rating 1652).}
+    \resumeItem{\textbf{Lead Organiser, WomenInDev 2.0 (IIIT Nagpur):} built the event platform for \textbf{200+ attendees}.}
+    \resumeItem{\textbf{Runner-Up, Women in Dev 2024 (Tantrafiesta, IIIT Nagpur):} built AASA, a real-time safety platform.}
+ \end{itemize}
+
+\end{document}
