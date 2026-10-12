@@ -6,6 +6,7 @@
 %   - Section titles are plain bold caps (no \scshape: it parsed as "E DUCATION")
 %   - Contact links print the actual URL text (ATS cannot read hyperlink targets)
 %   - Only ASCII-safe symbols in bullets (no arrows, tildes or special dashes)
+%   - No tables (dates/locations use \hfill), standard Times font, unique action verbs
 %-------------------------------------------------------------------------------
 \documentclass[letterpaper,11pt]{article}
 
@@ -17,9 +18,8 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
-\usepackage{tabularx}
 \usepackage[T1]{fontenc}
-\usepackage{lmodern}
+\usepackage{mathptmx}
 \usepackage[final]{microtype}
 \input{glyphtounicode}
 \pdfgentounicode=1
@@ -46,30 +46,22 @@
 \urlstyle{same}
 \raggedbottom
 \raggedright
-\setlength{\tabcolsep}{0in}
 
 \titleformat{\section}{\vspace{-8pt}\raggedright\large\bfseries}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
 
 % ---------- Custom commands ----------
 \newcommand{\resumeItem}[1]{\item\small{#1 \vspace{-2pt}}}
 \newcommand{\resumeSubheading}[4]{
-  \vspace{-2pt}\item
-    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{#1} & #2 \\
-      \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-7pt}
+  \vspace{-1pt}\item \textbf{#1} \hfill #2 \\
+  \textit{\small #3} \hfill \textit{\small #4}\vspace{-4pt}
 }
 \newcommand{\resumeProjectHeading}[2]{
-    \item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \small#1 & #2 \\
-    \end{tabular*}\vspace{-7pt}
+  \item \small #1 \hfill #2\vspace{-4pt}
 }
-\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}, itemsep=3pt, topsep=2pt]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.18in, itemsep=0pt]}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.18in, itemsep=0pt, topsep=1pt, parsep=0pt, label=\textbullet]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-3pt}}
 
 %-------------------------------------------------------------------------------
 \begin{document}
@@ -77,19 +69,19 @@
 %---------- HEADING ----------
 \begin{center}
   {\Huge \textbf{Shreya Thakur}} \\ \vspace{2pt}
-  \small +91-8668806190 $|$
-  \href{mailto:shreyathakurindia@gmail.com}{shreyathakurindia@gmail.com} $|$
+  \small +91-8668806190 \textbar{}
+  \href{mailto:shreyathakurindia@gmail.com}{shreyathakurindia@gmail.com} \textbar{}
   Pune, India \\ \vspace{1pt}
   \small
-  \href{https://www.linkedin.com/in/shreya-thakur-734097282/}{linkedin.com/in/shreya-thakur-734097282} $|$
-  \href{https://github.com/ShreyaThakur05}{github.com/ShreyaThakur05} $|$
+  \href{https://www.linkedin.com/in/shreya-thakur-734097282/}{linkedin.com/in/shreya-thakur-734097282} \textbar{}
+  \href{https://github.com/ShreyaThakur05}{github.com/ShreyaThakur05} \textbar{}
   \href{https://portfolio-website-nine-lovat-74.vercel.app}{portfolio-website-nine-lovat-74.vercel.app}
 \end{center}
 
 %---------- SUMMARY ----------
 \section{SUMMARY}
 \small{Software Engineer (SDE Intern at TruEstate) building production full-stack systems with TypeScript, Next.js, NestJS
-and SQL, and Generative AI applications with RAG, LLM agents, LangChain and LangGraph. LeetCode Knight (top 5\%).}
+and SQL, and Generative AI applications using RAG, LLM agents, LangChain and LangGraph. LeetCode Knight (top 5\%).}
 
 %---------- EDUCATION ----------
 \section{EDUCATION}
@@ -111,11 +103,11 @@ and SQL, and Generative AI applications with RAG, LLM agents, LangChain and Lang
       {TruEstate (AllDoors)}{Bangalore, India}
       {Software Development Engineer (SDE) Intern}{Jul 2026 -- Present}
       \resumeItemListStart
-        \resumeItem{Built the customer-facing \textbf{Next.js} and \textbf{TypeScript} website for AllDoors, a core pillar of iQOL,
+        \resumeItem{Developed the customer-facing \textbf{Next.js} and \textbf{TypeScript} website for AllDoors, a core pillar of iQOL,
           owning the landing and property detail pages from scratch; shipped \textbf{250+ commits (15K+ lines)} across \textbf{5 production repositories}.}
         \resumeItem{Led the \textbf{NoSQL to SQL migration}, restructuring the property data model, writing \textbf{NestJS} endpoints and
           backfill scripts; integrated a \textbf{Typesense} search index for fast, typo-tolerant property search.}
-        \resumeItem{Shipped \textbf{WhatsApp Cloud API} enquiry templates and reply notifications across a microservice, the API and the CRM;
+        \resumeItem{Integrated \textbf{WhatsApp Cloud API} enquiry templates and reply notifications across a microservice, the API and the CRM;
           built an analytics dashboard for user acquisition and conversion funnels.}
       \resumeItemListEnd
 
@@ -136,32 +128,32 @@ and SQL, and Generative AI applications with RAG, LLM agents, LangChain and Lang
     \resumeSubHeadingListStart
 
       \resumeProjectHeading
-          {\textbf{RAG-Based Document QA System} $|$ \emph{Python, FastAPI, GPT-4o, LangChain, Pinecone, MongoDB}}{}
+          {\textbf{RAG-Based Document QA System} \textbar{} \emph{Python, FastAPI, GPT-4o, LangChain, Pinecone, MongoDB}}{}
           \resumeItemListStart
             \resumeItem{Engineered a production-grade \textbf{Retrieval-Augmented Generation (RAG)} pipeline for multi-format documents
               (PDF, DOCX, images) with \textbf{Tesseract OCR} fallback, reducing manual review time by \textbf{40\%}.}
-            \resumeItem{Designed dual-layer caching (MongoDB exact match + Pinecone semantic match) with vector search and chunking to cut
+            \resumeItem{Implemented dual-layer caching (MongoDB exact match + Pinecone semantic match) with vector search and chunking to cut
               redundant LLM calls, tuning thresholds on cache hit rate and latency.}
           \resumeItemListEnd
 
       \resumeProjectHeading
-          {\textbf{ET GenAI Platform: Agentic News Intelligence} $|$ \emph{FastAPI, React, LangGraph, Groq Llama 3.3, SSE}}{}
+          {\textbf{ET GenAI Platform: Agentic News Intelligence} \textbar{} \emph{FastAPI, React, LangGraph, Groq Llama 3.3, SSE}}{}
           \resumeItemListStart
-            \resumeItem{Built a 3-node \textbf{LangGraph} agent pipeline (fetch, filter, format) streaming personalized briefings over
+            \resumeItem{Architected a 3-node \textbf{LangGraph} agent pipeline (fetch, filter, format) streaming personalized briefings over
               \textbf{Server-Sent Events} from 7 live news and market feeds, with grounded Q\&A and citations to limit hallucination.}
           \resumeItemListEnd
 
       \resumeProjectHeading
-          {\textbf{Comment Category Prediction} $|$ \emph{Python, LightGBM, XGBoost, scikit-learn, TF-IDF, SQL}}{}
+          {\textbf{Comment Category Prediction} \textbar{} \emph{Python, LightGBM, XGBoost, scikit-learn, TF-IDF, SQL}}{}
           \resumeItemListStart
-            \resumeItem{Developed an end-to-end \textbf{machine learning} classification pipeline on \textbf{198,000} samples, achieving a
+            \resumeItem{Trained an end-to-end \textbf{machine learning} classification pipeline on \textbf{198,000} samples, achieving a
               \textbf{Macro F1 of 0.817} with LightGBM and outperforming baselines by \textbf{7\%}.}
-            \resumeItem{Engineered 20+ features (temporal signals, vote ratios, demographic flags) and handled a 57.66\% class imbalance
+            \resumeItem{Extracted 20+ features (temporal signals, vote ratios, demographic flags) and handled a 57.66\% class imbalance
               using balanced class weights and 3-fold stratified cross-validation.}
           \resumeItemListEnd
 
       \resumeProjectHeading
-          {\textbf{SyntaxEye: AI Code Review Tool} $|$ \emph{React.js, Node.js, Express.js, Gemini API}}{}
+          {\textbf{SyntaxEye: AI Code Review Tool} \textbar{} \emph{React.js, Node.js, Express.js, Gemini API}}{}
           \resumeItemListStart
             \resumeItem{Designed structured \textbf{prompt engineering} templates (chain-of-thought, output-format constraints) for the Gemini API
               to review code for correctness, performance and security, improving response consistency by \textbf{30\%}.}
@@ -183,7 +175,7 @@ and SQL, and Generative AI applications with RAG, LLM agents, LangChain and Lang
 
 %---------- ACHIEVEMENTS ----------
 \section{ACHIEVEMENTS AND LEADERSHIP}
- \begin{itemize}[leftmargin=0.15in, itemsep=0pt]
+ \begin{itemize}[leftmargin=0.15in, itemsep=0pt, topsep=2pt, label=\textbullet]
     \resumeItem{\textbf{Amazon ML Summer School 2025:} selected in the top 5\% of 60,000+ applicants for Amazon's ML program.}
     \resumeItem{\textbf{LeetCode Knight:} 500+ problems solved, max rating 2006 (top 5\% globally); \textbf{CodeChef 3-Star} (max rating 1652).}
     \resumeItem{\textbf{Lead Organiser, WomenInDev 2.0 (IIIT Nagpur):} built the event platform for \textbf{200+ attendees}.}
